@@ -122,26 +122,7 @@ class UkfTract(luigi.Task):
 
     def output(self):
         return self.tract_prefix.with_suffix('.vtk')
-        
-
-def create_dirs(cases, dir):
-    from shutil import rmtree
-    from os import makedirs
-    from os.path import isdir
-    from os.path import join as pjoin
-    
-    makedirs(dir)
-    # if not isdir(dir): 
-    for id in cases:
-        makedirs(pjoin(dir, f'sub-{id}', 'anat'))
-        makedirs(pjoin(dir, f'sub-{id}', 'dwi'))
-        makedirs(pjoin(dir, f'sub-{id}', 'tracts'))
-        makedirs(pjoin(dir, f'sub-{id}', 'anat', 'freesurfer'))
-        makedirs(pjoin(dir, f'sub-{id}', 'fs2dwi'))
-        makedirs(pjoin(dir, f'sub-{id}', 'tracts', 'wmql'))
-        makedirs(pjoin(dir, f'sub-{id}', 'tracts', 'wmqlqc'))
-            
-            
+                   
             
 if __name__=='__main__':
     id='003GNX007'
@@ -157,7 +138,7 @@ if __name__=='__main__':
             overwrite=False
             print('Continuing with cached outputs')
             
-    if overwrite:
+    if overwrite and isdir(bids_derivatives):
         rmtree(bids_derivatives)
         create_dirs([id], bids_derivatives)
     
@@ -218,4 +199,4 @@ if __name__=='__main__':
                  tract_prefix= eddy_tract_prefix,
                  ukf_params= ukf_params)],
             local_scheduler=True)
-    
+
