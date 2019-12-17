@@ -35,7 +35,7 @@ def bet_mask(imgPath, maskPath, dim, bvalFile= None, thr= BET_THRESHOLD):
             raise ValueError('Input dimension should be 3 or 4')
 
 
-def work_flow(img, bval_file, out, bet_threshold):
+def work_flow(img, bval_file=None, out=None, bet_threshold= BET_THRESHOLD):
 
     prefix = img.name.split('.')[0]
     directory = img.parent

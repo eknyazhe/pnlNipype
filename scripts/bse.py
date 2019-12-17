@@ -4,12 +4,12 @@ from plumbum import cli, FG
 from plumbum.cmd import fslroi, ImageMath
 from conversion import read_bvals
 import os
-from util import load_nifti, save_nifti
+from util import load_nifti, save_nifti, B0_THRESHOLD
 
 import numpy as np
 
 
-def work_flow(dwi, bval_file, out, b0_threshold, dwimask, minimum= False, average= False, all= False):
+def work_flow(dwi, bval_file, out, b0_threshold=B0_THRESHOLD, dwimask=None, minimum= False, average= False, all= False):
 
     prefix = dwi.name.split('.')[0]
     directory = dwi.parent

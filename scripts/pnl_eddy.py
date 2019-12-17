@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from __future__ import print_function
+# from __future__ import print_function
 from os import getpid
 from util import logfmt, TemporaryDirectory, pjoin, FILEDIR, N_PROC, dirname
 from plumbum import local, cli, FG
@@ -31,7 +31,7 @@ def _Register_vol(volnii):
     return volnii
 
 
-def work_flow(dwi, bvalFile, bvecFile, out, debug, overwrite, nproc):
+def work_flow(dwi, bvalFile, bvecFile, out, debug=False, overwrite=False, nproc=N_PROC):
 
     out = local.path(out)
     if out.exists():
